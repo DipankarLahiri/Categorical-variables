@@ -8,4 +8,9 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
+library (dplyr)
+library (readr)
+
+my_df <- read_csv ('BES-2017-f2f-gender-fb-tw.csv')
+
 ```
