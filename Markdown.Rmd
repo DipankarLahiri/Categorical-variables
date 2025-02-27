@@ -8,9 +8,11 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 options(scipen = 999)
+install.packages('rcompanion')
 library (dplyr)
 library (readr)
 library (ggplot2)
+library (rcompanion)
 
 my_df <- read_csv ('BES-2017-f2f-gender-fb-tw.csv')
 
@@ -18,7 +20,7 @@ my_df <- read_csv ('BES-2017-f2f-gender-fb-tw.csv')
 
 #H1: There is an association between gender and social media use.
 
-``` {r hypothesis test}
+``` {r hypothesis test - FB}
 
 chisq.test(
   x = my_df$Gender,
@@ -38,9 +40,50 @@ my_df %>%
 
 # Homework: Gender and Twitter
 
-``` {r}
-
+``` {r hypothesis test - Twitter}
+chisq.test(
+  x = my_df$Gender,
+  y = my_df$Use_Twitter
+)
 ```
 
 
-``` {}
+``` {r}
+my_df %>%
+  ggplot (aes(x=Gender, fill = Use_Twitter)) + geom_bar (position = 'dodge')
+
+```
+
+## Findings - A Pearson’s Chi-Square test of independence shows a significant positive relationship between Gender and Facebook usage, χ²(1, N = 2189) = 18.05, p < 0.001. On the other hand, a Pearson’s Chi-Square test shows no significant relationship between Gender and Twitter usage, χ²(1, N = 2189) = 0.705, p = 0.401 (p>0.05).
+
+# Twitter and Facebook usage
+
+```{r}
+chisq.test(
+  x= my_df$Use_Facebook,
+  y= my_df$Use_Twitter
+)
+
+my_df %>% ggplot(aes(x = Use_Facebook, fill = Use_Twitter)) + geom_bar (position = 'dodge')
+
+```
+# We know now that Gender and Twitter use both have significant relationships with Facebook use. Which has a greater association? 
+
+```{r}
+fisher.test(
+  x = my_df$Gender,
+  y = my_df$Use_Facebook
+)
+
+fisher.test(
+  x = my_df$Use_Twitter,
+  y = my_df$Use_Facebook
+)
+```
+
+# Findings: A Fisher's exact test shows a significant negative relationship between Gender and Facebook use, OR = 0.69, 95% CI [0.58, 0.82], p < 0.001, suggesting that men are 31% less likely than women to use Facebook. A Fisher's exact test shows a significant positive relationship between Twitter use and Facebook use, OR = 7.45, 95% CI [5.31, 10.68], p < 0.001, suggesting that those who use Twitter are more than 7 times more likely to use Facebook as well.
+
+```{r}
+
+
+
