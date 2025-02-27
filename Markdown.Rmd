@@ -35,3 +35,12 @@ my_df %>%
 
 
 ```
+
+# Homework: Gender and Twitter
+
+``` {r}
+
+```
+
+
+``` {}
