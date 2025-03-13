@@ -1,5 +1,5 @@
 ---
-title: "Markdown"
+title: "Gender and social media use"
 author: "Dipankar Lahiri"
 date: "2025-02-27"
 output: html_document
@@ -17,7 +17,11 @@ my_df <- read_csv ('BES-2017-f2f-gender-fb-tw.csv')
 
 ```
 
-# H1: There is an association between gender and social media use.
+# This is an analysis of a sample dataset of 2189 individuals sourced from the 2017 British Election Study Data. The 2189 individuals were classified on Gender into Male and Female. Their responses on use of Facebook and Twitter respectively were entered as binary nominal variables.
+
+# Hypotheses 1: There is an association between gender and social media use.
+
+# Gender and Facebook
 
 ```{r hypothesis_test_FB}
 
@@ -37,7 +41,7 @@ my_df %>%
 
 ```
 
-# Homework: Gender and Twitter
+# Gender and Twitter
 
 ```{r hypothesis_test_Twitter}
 chisq.test(
@@ -53,9 +57,11 @@ my_df %>%
 
 ```
 
-## Findings - A Pearson’s Chi-Square test of independence shows a significant positive relationship between Gender and Facebook usage, χ²(1, N = 2189) = 18.05, p < 0.001. On the other hand, a Pearson’s Chi-Square test shows no significant relationship between Gender and Twitter usage, χ²(1, N = 2189) = 0.705, p = 0.401 (p>0.05).
+# Findings - A Pearson’s Chi-Square test of independence shows a significant positive relationship between Gender and Facebook usage, χ²(1, N = 2189) = 18.05, p < 0.001. 
 
-# Twitter and Facebook usage
+# On the other hand, a Pearson’s Chi-Square test shows no significant relationship between Gender and Twitter usage, χ²(1, N = 2189) = 0.705, p = 0.401 (p>0.05).
+
+# Twitter and Facebook use
 
 ```{r}
 chisq.test(
@@ -66,7 +72,9 @@ chisq.test(
 my_df %>% ggplot(aes(x = Use_Facebook, fill = Use_Twitter)) + geom_bar (position = 'dodge')
 
 ```
-# We know now that Gender and Twitter use both have significant relationships with Facebook use. Which has a greater association? 
+# A Pearson’s Chi-Square test of independence shows a significant positive relationship between Facebook use and Twitter use, χ²(1, N = 2189) = 175.13, p < 0.001. 
+
+# We know now that Gender and Twitter use both have significant relationships with Facebook use. The Twitter-Facebook relationship seems to be stronger than the Gender-Facebook relationship based on a higher X² value returned in the Chi-Square test. Let's explore these two relationships further with Fisher's exact test for count data. 
 
 ```{r}
 fisher.test(
@@ -133,6 +141,7 @@ knitr::kable(exp(cbind(OR = coef(model), confint.default(model))))
 ## Process: A binary logistic regression model was conducted to predict Facebook usage based on Gender and Twitter usage. The model was statistically significant, χ²(2, N = 2189) = 224.7, p < 0.001, indicating that the predictors explained a significant portion of variance in Facebook usage. The Akaike Information Criterion (AIC) was 2771, suggesting an improved model fit compared to the null model (AIC = 2989.7).
 
 ## Findings
+# The likeliest person in our sample to be a Facebook user is a Twitter-using Female (90.6% predicted probability) and the least likely person to be a Facebook user is a non-Twitter-using Male (45% predicted probability).
 # Gender: Men were significantly less likely to use Facebook than women (β = -0.431, p < 0.001). The odds of Facebook use for men were 35% lower compared to women (OR = 0.65, 95% CI: 0.54 - 0.78). The predicted probability of Facebook use was ~55.7% for women and ~44.9% for men, holding Twitter usage constant. 
-# Twitter Usage: Those who used Twitter were significantly more likely to use Facebook (β = 2.038, p < 0.001). Twitter users had 7.67 times higher odds of using Facebook compared to non-Twitter users (OR = 7.67, 95% CI: 5.48 - 10.73). The predicted probability of Facebook use increased from ~45% (Male, No Twitter) to ~90.6% (Female, Yes Twitter).
-# Twitter users are more likely to use Facebook even after controlling for Gender. Gender still has an independent effect on Facebook use.
+# Twitter Usage: Those who used Twitter were significantly more likely to use Facebook (β = 2.038, p < 0.001). Twitter users had 7.67 times higher odds of using Facebook compared to non-Twitter users (OR = 7.67, 95% CI: 5.48 - 10.73). 
+# Twitter users are more likely to use Facebook even after controlling for Gender. Gender also has an independent effect on Facebook use.
