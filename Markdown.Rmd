@@ -19,7 +19,8 @@ my_df <- read_csv ('BES-2017-f2f-gender-fb-tw.csv')
 
 # This is an analysis of a sample dataset of 2189 individuals sourced from the 2017 British Election Study Data. The 2189 individuals were classified on Gender into Male and Female. Their responses on use of Facebook and Twitter respectively were entered as binary nominal variables.
 
-# Hypotheses 1: There is an association between gender and social media use.
+# Hypotheses: There is an association between gender and social media use.
+
 
 # Gender and Facebook
 
@@ -61,6 +62,7 @@ my_df %>%
 
 # On the other hand, a Pearson’s Chi-Square test shows no significant relationship between Gender and Twitter usage, χ²(1, N = 2189) = 0.705, p = 0.401 (p>0.05).
 
+
 # Twitter and Facebook use
 
 ```{r}
@@ -72,6 +74,7 @@ chisq.test(
 my_df %>% ggplot(aes(x = Use_Facebook, fill = Use_Twitter)) + geom_bar (position = 'dodge')
 
 ```
+
 
 # A Pearson’s Chi-Square test of independence shows a significant positive relationship between Facebook use and Twitter use, χ²(1, N = 2189) = 175.13, p < 0.001. 
 
