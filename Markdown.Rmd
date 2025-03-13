@@ -72,6 +72,7 @@ chisq.test(
 my_df %>% ggplot(aes(x = Use_Facebook, fill = Use_Twitter)) + geom_bar (position = 'dodge')
 
 ```
+
 # A Pearson’s Chi-Square test of independence shows a significant positive relationship between Facebook use and Twitter use, χ²(1, N = 2189) = 175.13, p < 0.001. 
 
 # We know now that Gender and Twitter use both have significant relationships with Facebook use. The Twitter-Facebook relationship seems to be stronger than the Gender-Facebook relationship based on a higher X² value returned in the Chi-Square test. Let's explore these two relationships further with Fisher's exact test for count data. 
