@@ -23,8 +23,9 @@ my_df <- read_csv ('BES-2017-f2f-gender-fb-tw.csv')
 # Main findings
 # 1. Men are 31% less likely than women to use Facebook. 
 # 2. Women are 23.5% less likely than men to use Twitter.
-# 3. Those who use Twitter are more than 7 times more likely to be Facebook users as well than those who do not use Twitter. 
-# 4. The likeliest person in our sample to be a Facebook user is a Twitter-using Female (90.6% predicted probability) and the least likely person to be a Facebook user is a non-Twitter-using Male (45% predicted probability).
+# 3. 14.8% (95% CI: 13.3% - 16.3%) people use both Facebook and Twitter. 40.9% (95% CI: 38.9% - 42.9%) people use neither.
+# 4. Those who use Twitter are more than 7 times more likely to be Facebook users as well than those who do not use Twitter. 
+# 5. The likeliest person in our sample to be a Facebook user is a Twitter-using Female (90.6% predicted probability) and the least likely person to be a Facebook user is a non-Twitter-using Male (45% predicted probability).
 
 
 ```{r summarising variables}
@@ -41,7 +42,7 @@ my_df %>% count(Use_Twitter) %>% mutate(percentage = n / sum(n) * 100)
 # Hypotheses: There is an association between gender and social media use.
 
 
-# Gender and Facebook
+# GENDER AND FACEBOOK
 
 ```{r hypothesis_test_FB}
 
@@ -61,7 +62,7 @@ my_df %>%
 
 ```
 
-# Gender and Twitter
+# GENDER AND TWITTER
 
 ```{r hypothesis_test_Twitter}
 chisq.test(
@@ -82,7 +83,7 @@ my_df %>%
 # On the other hand, a Pearson’s Chi-Square test shows no significant relationship between Gender and Twitter use, χ²(1, N = 2189) = 0.705, p = 0.401 (p>0.05). This could be because of the low proportion of Twitter users in the sample (17%).
 
 
-# Twitter and Facebook use
+# TWITTER USE AND FACEBOOK USE
 
 ```{r}
 chisq.test(
@@ -116,7 +117,7 @@ fisher.test(
 
 # A Fisher's exact test shows a significant positive relationship between Twitter use and Facebook use, OR = 7.45, 95% CI [5.31, 10.68], p < 0.001, suggesting that those who use Twitter are more than 7 times more likely to use Facebook compared to those who who do not use Twitter. The 95% confidence interval indicates that the true population odds ratio is likely between 5.31 and 10.68, meaning that Twitter users have at least 5.3 times higher odds and at most 10.7 times higher odds of using Facebook than non-Twitter users.
 
-# Logistic regression
+# LOGISTIC REGRESSION
 
 ```{r}
 my_df <- my_df %>%
@@ -172,7 +173,7 @@ knitr::kable(exp(cbind(OR = coef(model), confint.default(model))))
 # Twitter Usage: Those who used Twitter were significantly more likely to use Facebook (β = 2.038, p < 0.001). Twitter users had 7.67 times higher odds of using Facebook compared to non-Twitter users (OR = 7.67, 95% CI: 5.48 - 10.73). 
 # Twitter users are more likely to use Facebook even after controlling for Gender. Gender also has an independent effect on Facebook use.
 
-# Logistic regression: Predicting gender from social media use
+# PREDICTING GENDER FROM SOCIAL MEDIA USE
 
 ```{r}
 N <- 2189
@@ -209,4 +210,4 @@ new_data
 
 # Proportion using both Twitter and Facebook: 14.8% (95% CI: 13.3% - 16.3%). Proportion using neither platform: 40.9% (95% CI: 38.9% - 42.9%). 
 
-# A binary logistic regression was conducted to predict the likelihood of being Female based on Twitter and Facebook usage. Women were 23.5% less likely than men to use Twitter (OR = 0.77, 95% CI: 0.60 - 0.97, p < 0.001). Women were 53.8% more likely than men to use Facebook (OR = 1.54, 95% CI: 1.29 - 1.84, p < 0.001). This suggests Facebook-only users have the highest probability of being Female, while Twitter-only users have the highest probability of being Male. Those who use neither platform are closer to an even gender split.
+# A binary logistic regression was conducted to predict Gender based on Twitter and Facebook usage. Women were 23.5% less likely than men to use Twitter (OR = 0.77, 95% CI: 0.60 - 0.97, p < 0.001). Women were 53.8% more likely than men to use Facebook (OR = 1.54, 95% CI: 1.29 - 1.84, p < 0.001). This suggests Facebook-only users have the highest probability of being Female, while Twitter-only users have the highest probability of being Male. Those who use neither platform are closer to an even gender split.
