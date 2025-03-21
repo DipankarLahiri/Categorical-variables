@@ -18,7 +18,7 @@ my_df <- read_csv ('BES-2017-f2f-gender-fb-tw.csv')
 ```
 
 
-# This is an analysis of a random sample dataframe of 2189 individuals sourced from the 2017 British Election Study data. The 2189 individuals were classified on Gender into Male and Female. Their responses on use of Facebook and Twitter respectively were entered as binary nominal variables. 
+# This is an analysis of a random sample dataframe of 2189 individuals classified on Gender into Male and Female. Their responses on use of Facebook and Twitter respectively were entered as binary nominal variables. 
 
 # Main findings
 # 1. Men are 31% less likely than women to use Facebook. 
